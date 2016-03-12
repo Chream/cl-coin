@@ -65,19 +65,19 @@
            (let ((byte (read-byte in)))
              (cond
                ((<= 1 byte 75)
-                (cons byte
+                (list byte
                       (read-value 'blob in :bytes byte)))
                ((= byte 76)
                 (let ((sz (read-byte in)))
-                  (cons byte
+                  (list byte
                         (read-value 'blob in :bytes sz))))
                ((= byte 77)
                 (let ((sz (nibbles:read-ub16/le in)))
-                  (cons byte
+                  (list byte
                         (read-value 'blob in :bytes sz))))
                ((= byte 78)
                 (let ((sz (nibbles:read-ub32/le in)))
-                  (cons byte
+                  (list byte
                         (read-value 'blob in :bytes sz))))
                (t byte))))
   (:writer (out value)
