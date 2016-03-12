@@ -65,7 +65,7 @@
            (let ((byte (read-byte in)))
              (cond
                ((<= 1 byte 75)
-                (cons byte 
+                (cons byte
                       (read-value 'blob in :bytes byte)))
                ((= byte 76)
                 (let ((sz (read-byte in)))
@@ -73,7 +73,7 @@
                         (read-value 'blob in :bytes sz))))
                ((= byte 77)
                 (let ((sz (nibbles:read-ub16/le in)))
-                  (cons byte 
+                  (cons byte
                         (read-value 'blob in :bytes sz))))
                ((= byte 78)
                 (let ((sz (nibbles:read-ub32/le in)))
@@ -140,10 +140,3 @@
    (inputs (many :type 'tx-in))
    (outputs (many :type 'tx-out))
    (lock-time u4/le)))
-   
-
-(defun test-parse-tx ()
-  (let ((s (ironclad:make-octet-input-stream 
-            (ironclad:hex-string-to-byte-array 
-             "01000000010c432f4fb3e871a8bda638350b3d5c698cf431db8d6031b53e3fb5159e59d4a9000000006b48304502201123d735229382f75496e84ae5831871796ef78726805adc2c6edd36d23e7210022100faceab822a4943309c4b6b61240ae3a9e18ed90a75117c5dc4bfd8f7e17a21d301210367ce0a1c3b3e84cece6dad1a181d989d8e490b84f5431a1f778a88b284c935e6ffffffff0100f2052a010000001976a9143744841e13b90b4aca16fe793a7f88da3a23cc7188ac000000007822dda72d9bf421d2f3eedc678bf58c6e4c10cdd047b9e137559ad384933ef5"))))
-    (read-value 'transaction s)))
