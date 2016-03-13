@@ -10,9 +10,9 @@
   (:export
 
    ;; Classes.
-   :tx-in :prevout-hash :prevput-index :script :seq
+   :tx-in :prevout-hash :prevout-index :script :seq
    :tx-out :value :script
-   :transaction :version :inputs :outputs :lock-time
+   :BTC-transaction :version :inputs :outputs :lock-time
 
    ;; Methods.
    :read-value

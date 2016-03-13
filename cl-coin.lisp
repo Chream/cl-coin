@@ -117,9 +117,14 @@
 
 (define-binary-class tx-in ()
   ((prevout-hash (blob :bytes 32))
-   (prevput-index u4/le)
+   (prevout-index u4/le)
    (script script)
    (seq u4/le)))
+
+;; Needed as hash is read little endian.
+(defmethod prevout-hash :around ((tx tx-in))
+  (let ((prevout-hash-le (reverse (call-next-method))))
+    prevout-hash-le))
 
 (define-binary-class tx-out ()
   ((value u8/le)
@@ -135,7 +140,7 @@
            (dolist (i inps)
              (write-value type out i))))
 
-(define-binary-class transaction ()
+(define-binary-class BTC-transaction ()
   ((version u4/le)
    (inputs (many :type 'tx-in))
    (outputs (many :type 'tx-out))
