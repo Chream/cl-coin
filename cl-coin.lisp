@@ -82,7 +82,7 @@
                (t byte))))
   (:writer (out value)
            (etypecase value
-               (cons (destructuring-bind (opcode . vector)
+               (cons (destructuring-bind (opcode vector)
                          value
                        (write-byte opcode out)
                        (cond
