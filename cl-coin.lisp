@@ -113,18 +113,16 @@
              (let ((oct (ironclad:get-output-stream-octets sout)))
                (write-value 'lp-blob out oct)))))
 
-
-
 (define-binary-class tx-in ()
   ((prevout-hash (blob :bytes 32))
    (prevout-index u4/le)
    (script script)
    (seq u4/le)))
 
-;; Needed as hash is read little endian.
-(defmethod prevout-hash :around ((tx tx-in))
-  (let ((prevout-hash-le (reverse (call-next-method))))
-    prevout-hash-le))
+;; Needed as hash is displayed as big endian. UPDATE:Should be done only when displaying hex string.
+;; (defmethod prevout-hash :around ((tx tx-in))
+;;   (let ((prevout-hash-le (reverse (call-next-method))))
+;;     prevout-hash-le))
 
 (define-binary-class tx-out ()
   ((value u8/le)
