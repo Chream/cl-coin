@@ -138,7 +138,7 @@
            (dolist (i inps)
              (write-value type out i))))
 
-(define-binary-class BTC-transaction ()
+(define-binary-class BTC-Transaction ()
   ((version u4/le)
    (inputs (many :type 'tx-in))
    (outputs (many :type 'tx-out))
